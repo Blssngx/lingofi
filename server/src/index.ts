@@ -12,7 +12,7 @@ app.use(bodyParser.json())
 app.use(express.json({limit: '50mb'}))
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Welcome to Lingofi API')
 })
 
 app.use('/chat', chatRouter)

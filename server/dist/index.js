@@ -14,7 +14,7 @@ app.use(body_parser_1.default.urlencoded({ extended: true }));
 app.use(body_parser_1.default.json());
 app.use(express_1.default.json({ limit: '50mb' }));
 app.get('/', (req, res) => {
-    res.send('Hello World!');
+    res.send('Welcome to Lingofi API');
 });
 app.use('/chat', chatRouter_1.default);
 app.use('/images', imagesRouter_1.default);
