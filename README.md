@@ -4,7 +4,7 @@ Welcome to Lingofi, a transformative platform bringing blockchain technology clo
 
 ## Initialization
 
-Lingofi was initialized using `rn-ai`, a comprehensive full-stack framework designed for building cross-platform mobile AI applications. `rn-ai` supports a wide array of features including LLM real-time/streaming text, chat UIs, image services, natural language to images with multiple models, and advanced image processing capabilities. This robust foundation allows Lingofi to offer seamless, intuitive interactions and services to its users.
+Lingofi was initialized using `rn-ai` (https://github.com/dabit3/react-native-ai.git), a comprehensive full-stack framework designed for building cross-platform mobile AI applications. `rn-ai` supports a wide array of features including LLM real-time/streaming text, chat UIs, image services, natural language to images with multiple models, and advanced image processing capabilities. This robust foundation allows Lingofi to offer seamless, intuitive interactions and services to its users.
 
 ## Features
 
