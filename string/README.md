@@ -1,0 +1,3 @@
+## Lingofi String
+
+"Lingofi String" is a secure, blockchain-based system designed to facilitate the one-time transfer of cryptocurrency funds through uniquely generated links. Each link, embedded with a distinctive token, serves as a one-time gateway for recipients to claim their funds, ensuring a high level of security and privacy. Once a transaction is completed, the link self-invalidates, preventing any further use. This innovative approach combines the efficiency of digital transactions with enhanced security measures, catering to users seeking a reliable method of transferring crypto assets.
