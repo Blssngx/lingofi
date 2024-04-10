@@ -16,7 +16,7 @@ export function Header() {
   return (
     <View style={styles.container}>
       {/* <Icon size={34} fill={theme.textColor} /> */}
-      <Text style={{fontSize: 25, fontWeight: 'bold'}}>Lingori</Text>
+      <Text style={{fontSize: 25, fontWeight: 'bold'}}>Lingofi</Text>
       <TouchableHighlight
         style={styles.buttonContainer}
         underlayColor={'transparent'}

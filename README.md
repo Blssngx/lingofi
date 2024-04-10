@@ -13,3 +13,6 @@ Lingofi was initialized using `rn-ai` (https://github.com/dabit3/react-native-ai
 - **AI-Powered Services**: From chat-based transaction initiations to image processing for document verification, Lingofi harnesses AI to enhance user experience and accessibility.
 - **Cross-Platform Accessibility**: Built with `rn-ai`, Lingofi is accessible across multiple platforms, ensuring a wide-reaching impact and usability.
 
+## Logo
+
+The logo was generated using a font called Yardings 12 (https://fonts.google.com/share?selection.family=Plaster|Yarndings+12). By typing the letter 'a'.
