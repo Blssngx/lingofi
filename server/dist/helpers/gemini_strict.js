@@ -8,7 +8,7 @@ temperature = 1, num_tries = 3, verbose = false) {
     const dynamic_elements = /<.*?>/.test(JSON.stringify(output_format));
     const list_output = /\[.*?\]/.test(JSON.stringify(output_format));
     let error_msg = "";
-    const genAIInit = new generative_ai_1.GoogleGenerativeAI(`${process.env.GEMINI_API_KEY}`); // Initializing the Gemini API
+    const genAIInit = new generative_ai_1.GoogleGenerativeAI("AIzaSyA3dJmGEmvMhgXahbbN4frwyAVFoq4nlp4"); // Initializing the Gemini API
     for (let i = 0; i < num_tries; i++) {
         let output_format_prompt = `You are to output ${list_output ? "an array of objects in" : ""} the following format: ${JSON.stringify(output_format)}. 
     \nDo not put quotation marks or escape character \\ in the output fields.`;

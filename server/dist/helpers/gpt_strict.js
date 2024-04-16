@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.strict_output = void 0;
 const openai_1 = __importDefault(require("openai"));
 const openai = new openai_1.default({
-    apiKey: `${process.env.OPENAI_API_KEY}`,
-    dangerouslyAllowBrowser: true
+    apiKey: "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",
 });
 async function strict_output(system_prompt, user_prompt, output_format, default_category = "", output_value_only = false, model = "gpt-3.5-turbo", temperature = 1, num_tries = 3, verbose = false) {
     // if the user input is in a list, we also process the output as a list of json

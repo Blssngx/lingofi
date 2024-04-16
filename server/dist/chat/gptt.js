@@ -1,7 +1,4 @@
 "use strict";
-// import { Request, Response } from "express";
-// import asyncHandler from 'express-async-handler';
-// import { strict_output } from "../helpers/gpt_strict";
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -14,11 +11,11 @@ exports.gpt = (0, express_async_handler_1.default)(async (req, res) => {
         gpt: 'gpt-4'
     };
     try {
-        res.writeHead(200, {
-            'Content-Type': 'text/event-stream',
-            'Connection': 'keep-alive',
-            'Cache-Control': 'no-cache'
-        });
+        // res.writeHead(200, {
+        //   'Content-Type': 'text/event-stream',
+        //   'Connection': 'keep-alive',
+        //   'Cache-Control': 'no-cache'
+        // })
         const { model, messages } = req.body;
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -76,7 +73,6 @@ exports.gpt = (0, express_async_handler_1.default)(async (req, res) => {
                     const { delta } = choices[0];
                     const { content } = delta;
                     if (content) {
-                        console.log('content: ', JSON.stringify(delta));
                         res.write(`data: ${JSON.stringify(delta)}\n\n`);
                     }
                 }

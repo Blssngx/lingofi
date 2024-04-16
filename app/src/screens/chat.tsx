@@ -8,7 +8,8 @@ import {
   ScrollView,
   ActivityIndicator,
   FlatList,
-  Keyboard
+  Keyboard,
+  Platform
 } from 'react-native'
 import 'react-native-get-random-values'
 import { useContext, useState, useRef } from 'react'
@@ -95,7 +96,7 @@ export function Chat() {
       ...geminiResponse.messages, {
         user: input,
       }
-    ] as [{user: string, assistant?: string}]
+    ] as [{ user: string, assistant?: string }]
 
     setGeminiResponse(c => ({
       index: c.index,
@@ -120,7 +121,7 @@ export function Chat() {
 
     const es = await getEventSource(eventSourceArgs)
 
-   
+
     const listener = (event) => {
       if (event.type === "open") {
         console.log("Open SSE connection.")
@@ -132,7 +133,7 @@ export function Chat() {
               animated: true
             })
           }
-        
+
           const data = event.data
           localResponse = localResponse + JSON.parse(data)
           geminiArray[geminiArray.length - 1].assistant = localResponse
@@ -155,7 +156,7 @@ export function Chat() {
         setLoading(false)
       }
     }
-   
+
     es.addEventListener("open", listener);
     es.addEventListener("message", listener);
     es.addEventListener("error", listener);
@@ -171,7 +172,7 @@ export function Chat() {
       ...mistralResponse.messages, {
         user: input,
       }
-    ] as [{user: string, assistant?: string}]
+    ] as [{ user: string, assistant?: string }]
 
     setMistralResponse(c => ({
       index: c.index,
@@ -230,7 +231,7 @@ export function Chat() {
         setLoading(false)
       }
     }
-   
+
     es.addEventListener("open", listener);
     es.addEventListener("message", listener);
     es.addEventListener("error", listener);
@@ -246,7 +247,7 @@ export function Chat() {
       ...claudeResponse.messages, {
         user: input,
       }
-    ] as [{user: string, assistant?: string}]
+    ] as [{ user: string, assistant?: string }]
 
     setClaudeResponse(c => ({
       index: c.index,
@@ -320,12 +321,13 @@ export function Chat() {
           {
             role: 'assistant',
             content: getFirstNCharsOrLess(
-              openaiResponse.messages[openaiResponse.messages.length -1].assistant
+              openaiResponse.messages[openaiResponse.messages.length - 1].assistant
             )
           }
         ]
       }
-      messagesRequest = [...messagesRequest, {role: 'user', content: input}]
+      messagesRequest = [...messagesRequest, { role: 'user', content: input }]
+      // console.log('messagesRequest: ', messagesRequest)
       setOpenaiMessages(messagesRequest)
 
       // set local openai state to dislay user's most recent question
@@ -340,7 +342,8 @@ export function Chat() {
         index: c.index,
         messages: JSON.parse(JSON.stringify(openaiArray))
       }))
-
+      // console.log('openaiArray: ', openaiArray)
+      console.log('openaiResponse: ', openaiResponse.messages)
       let localResponse = ''
       const eventSourceArgs = {
         body: {
@@ -351,9 +354,9 @@ export function Chat() {
       }
       setInput('')
       const eventSource = getEventSource(eventSourceArgs)
-
+      console.log('eventSource: ', eventSource)
       console.log('about to open listener...')
-      const listener = (event:any) => {
+      const listener = (event: any) => {
         if (event.type === "open") {
           console.log("Open SSE connection.")
           setLoading(false)
@@ -367,9 +370,11 @@ export function Chat() {
             // if (!JSON.parse(event.data).content) return
             localResponse = localResponse + JSON.parse(event.data).content
             openaiArray[openaiArray.length - 1].assistant = localResponse
+            // console.log('openAiResponse 2: ', openaiResponse.messages)
             setOpenaiResponse(c => ({
               index: c.index,
               messages: JSON.parse(JSON.stringify(openaiArray))
+             
             }))
           } else {
             setLoading(false)
@@ -453,7 +458,7 @@ export function Chat() {
               if (JSON.parse(event.data).text) {
                 if (!localResponse && JSON.parse(event.data).text === '\n') return
                 if (
-                  !localResponse && 
+                  !localResponse &&
                   JSON.parse(event.data).text.charAt(0) === ' '
                 ) {
                   localResponse = JSON.parse(event.data).text.substring(1)
@@ -489,7 +494,7 @@ export function Chat() {
           es.close()
         }
       }
-     
+
       es.addEventListener("open", listener)
       es.addEventListener("message", listener)
       es.addEventListener("error", listener)
@@ -543,7 +548,7 @@ export function Chat() {
       })
       setGeminiAPIMessages('')
     }
-     else {
+    else {
       setOpenaiResponse({
         messages: [],
         index: uuid()
@@ -554,7 +559,7 @@ export function Chat() {
 
   function renderItem({
     item, index
-  } : {
+  }: {
     item: any, index: number
   }) {
     return (
@@ -566,27 +571,27 @@ export function Chat() {
             </Text>
           </View>
         </View>
-      {
-        item.assistant && (
-          <View style={styles.textStyleContainer}>
-            <Markdown
-              style={styles.markdownStyle as any}
-            >{item.assistant}</Markdown>
-            <TouchableHighlight
-              onPress={() => showClipboardActionsheet(item.assistant)}
-              underlayColor={'transparent'}
-            >
-              <View style={styles.optionsIconWrapper}>
-                <Ionicons
-                  name="apps"
-                  size={20}
-                  color={theme.textColor}
-                />
-              </View>
-            </TouchableHighlight>
-          </View>
-        )
-      }
+        {
+          item.assistant && (
+            <View style={styles.textStyleContainer}>
+              <Markdown
+                style={styles.markdownStyle as any}
+              >{item.assistant}</Markdown>
+              <TouchableHighlight
+                onPress={() => showClipboardActionsheet(item.assistant)}
+                underlayColor={'transparent'}
+              >
+                <View style={styles.optionsIconWrapper}>
+                  <Ionicons
+                    name="apps"
+                    size={20}
+                    color={theme.textColor}
+                  />
+                </View>
+              </TouchableHighlight>
+            </View>
+          )
+        }
       </View>
     )
   }
@@ -609,7 +614,7 @@ export function Chat() {
 
   return (
     <KeyboardAvoidingView
-      behavior="padding"
+      behavior={Platform.OS === 'ios' ? 'padding' : "height"}
       style={styles.container}
       keyboardVerticalOffset={110}
     >
@@ -622,7 +627,7 @@ export function Chat() {
           !callMade && (
             <View style={styles.midChatInputWrapper}>
               <View style={styles.midChatInputContainer}>
-                
+
                 <TextInput
                   onChangeText={v => setInput(v)}
                   style={styles.midInput}
@@ -654,51 +659,51 @@ export function Chat() {
         {
           callMade && (
             <>
-            {
-              chatType.label.includes('gpt') && (
-                <FlatList
-                  data={openaiResponse.messages}
-                  renderItem={renderItem}
-                  scrollEnabled={false}
-                />
-              )
-            }
-            {
-              chatType.label.includes('claude') && (
-                <FlatList
-                  data={claudeResponse.messages}
-                  renderItem={renderItem}
-                  scrollEnabled={false}
-                />
-              )
-            }
-            {
-              chatType.label.includes('cohere') && (
-                <FlatList
-                  data={cohereResponse.messages}
-                  renderItem={renderItem}
-                  scrollEnabled={false}
-                />
-              )
-            }
-            {
-              chatType.label.includes('mistral') && (
-                <FlatList
-                  data={mistralResponse.messages}
-                  renderItem={renderItem}
-                  scrollEnabled={false}
-                />
-              )
-            }
-            {
-              chatType.label.includes('gemini') && (
-                <FlatList
-                  data={geminiResponse.messages}
-                  renderItem={renderItem}
-                  scrollEnabled={false}
-                />
-              )
-            }
+              {
+                chatType.label.includes('gpt') && (
+                  <FlatList
+                    data={openaiResponse.messages}
+                    renderItem={renderItem}
+                    scrollEnabled={false}
+                  />
+                )
+              }
+              {
+                chatType.label.includes('claude') && (
+                  <FlatList
+                    data={claudeResponse.messages}
+                    renderItem={renderItem}
+                    scrollEnabled={false}
+                  />
+                )
+              }
+              {
+                chatType.label.includes('cohere') && (
+                  <FlatList
+                    data={cohereResponse.messages}
+                    renderItem={renderItem}
+                    scrollEnabled={false}
+                  />
+                )
+              }
+              {
+                chatType.label.includes('mistral') && (
+                  <FlatList
+                    data={mistralResponse.messages}
+                    renderItem={renderItem}
+                    scrollEnabled={false}
+                  />
+                )
+              }
+              {
+                chatType.label.includes('gemini') && (
+                  <FlatList
+                    data={geminiResponse.messages}
+                    renderItem={renderItem}
+                    scrollEnabled={false}
+                  />
+                )
+              }
             </>
           )
         }
@@ -711,8 +716,8 @@ export function Chat() {
       {
         callMade && (
           <View
-              style={styles.chatInputContainer}
-            >
+            style={styles.chatInputContainer}
+          >
             <TextInput
               style={styles.input}
               onChangeText={v => setInput(v)}

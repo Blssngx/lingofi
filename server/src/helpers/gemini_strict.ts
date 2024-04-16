@@ -20,7 +20,7 @@ export async function strict_output(
   const list_output: boolean = /\[.*?\]/.test(JSON.stringify(output_format));
 
   let error_msg: string = "";
-  const genAIInit = new GoogleGenerativeAI(`${process.env.GEMINI_API_KEY}`) // Initializing the Gemini API
+  const genAIInit = new GoogleGenerativeAI("AIzaSyA3dJmGEmvMhgXahbbN4frwyAVFoq4nlp4") // Initializing the Gemini API
 
   for (let i = 0; i < num_tries; i++) {
     let output_format_prompt = `You are to output ${list_output ? "an array of objects in" : ""
