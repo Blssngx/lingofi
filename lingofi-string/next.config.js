@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: ["images.unsplash.com", "i.ibb.co"],
+  },
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config) => {

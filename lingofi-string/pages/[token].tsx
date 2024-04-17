@@ -118,7 +118,7 @@ export default function Home() {
     if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = 'http://localhost:8080/api/getString/';
+        const url = 'https://server.lingofi.xyz/api/getString/';
         const body = {
           token: token,
           toAddress: address
@@ -158,11 +158,11 @@ export default function Home() {
         {message ? (
           <div className="w-full flex flex-col h-screen items-center text-center justify-center py-12 px-4 lg:px-0">
             <div className="w-full max-w-lg mx-auto">
-              <div>
+              <div className="flex items-center justify-center place-content-center">
                 <Image
                   src={'https://i.ibb.co/SNXmDBs/adaptive-icon.png'}
-                  width={100}
-                  height={100}
+                  width={150}
+                  height={150}
                   alt="Lingofi Logo"
                 />
               </div>
@@ -185,11 +185,11 @@ export default function Home() {
     return (
       <div className="w-full flex flex-col h-screen items-center text-center justify-center py-12 px-4 lg:px-0">
         <div className="w-full max-w-lg mx-auto">
-          <div>
+          <div className="flex items-center justify-center place-content-center">
             <Image
               src={'https://i.ibb.co/SNXmDBs/adaptive-icon.png'}
-              width={100}
-              height={100}
+              width={150}
+              height={150}
               alt="Lingofi Logo"
             />
           </div>
@@ -205,36 +205,13 @@ export default function Home() {
     return (
       <div className="w-full flex flex-col h-screen items-center text-center justify-center py-12 px-4 lg:px-0">
         <div className="w-full max-w-lg mx-auto">
-          <div>
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 50 50"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              xmlSpace="preserve"
-              style={{
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                strokeLinejoin: "round",
-                strokeMiterlimit: 2,
-              }}
-              className="w-20 h-20 mx-auto mb-6"
-            >
-              <g transform="matrix(0.239703,0,0,0.239703,-26.037,-126.482)">
-                <g transform="matrix(288,0,0,288,328.533,730.956)" />
-                <text
-                  x="95.917px"
-                  y="730.956px"
-                  style={{
-                    fontFamily: "'Yarndings12-Regular', 'Yarndings 12'",
-                    fontSize: 288,
-                  }}
-                >
-                  {"a"}
-                </text>
-              </g>
-            </svg>
+          <div className="flex items-center justify-center place-content-center">
+            <Image
+              src={'https://i.ibb.co/SNXmDBs/adaptive-icon.png'}
+              width={150}
+              height={150}
+              alt="Lingofi Logo"
+            />
           </div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             Funds successfully claimed!
@@ -265,36 +242,13 @@ export default function Home() {
       ) : (
         <div className="w-full flex flex-col h-screen items-center text-center justify-center py-12 px-4 lg:px-0">
           <div className="w-full max-w-lg mx-auto">
-            <div>
-              <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 50 50"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-                xmlSpace="preserve"
-                style={{
-                  fillRule: "evenodd",
-                  clipRule: "evenodd",
-                  strokeLinejoin: "round",
-                  strokeMiterlimit: 2,
-                }}
-                className="w-20 h-20 mx-auto mb-6"
-              >
-                <g transform="matrix(0.239703,0,0,0.239703,-26.037,-126.482)">
-                  <g transform="matrix(288,0,0,288,328.533,730.956)" />
-                  <text
-                    x="95.917px"
-                    y="730.956px"
-                    style={{
-                      fontFamily: "'Yarndings12-Regular', 'Yarndings 12'",
-                      fontSize: 288,
-                    }}
-                  >
-                    {"a"}
-                  </text>
-                </g>
-              </svg>
+            <div className="flex items-center justify-center place-content-center">
+              <Image
+                src={'https://i.ibb.co/SNXmDBs/adaptive-icon.png'}
+                width={150}
+                height={150}
+                alt="Lingofi Logo"
+              />
             </div>
             {senderAddress ? (
               <>
