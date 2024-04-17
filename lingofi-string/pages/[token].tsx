@@ -114,29 +114,23 @@ export default function Home() {
   }, []);
 
   const handleSubmit = async () => {
-    if (token && address && isClient) { // Ensure token, address, and isClient are truthy
+    if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = `/api/claimString?token=${token}&address=${address}`;
+        const url = `/api/claimString/?token=${token}&address=${address}`;
         const res = await fetch(url);
         const data = await res.json();
         console.log(data);
         if (data.transactionHash) {
-          setTx(data.transactionHash); // Set the transaction hash
-          clearLocalStorage(); // Clear local storage
-        } else {
-          console.error("No transaction hash returned:", data);
+          setTx(data.transactionHash);
+          setLoading(false); // Stop loading
+          clearLocalStorage();
         }
       } catch (error) {
         console.error("Failed to claim funds:", error);
-      } finally {
-        setLoading(false); // Stop loading regardless of success or failure
       }
-    } else {
-      console.error("Token, address, or client check failed.");
     }
   };
-  
 
   if (!senderName || !senderAddress || !sentAsset) {
     return (
