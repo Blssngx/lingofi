@@ -117,7 +117,7 @@ export default function Home() {
     if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = `/api/claimString/?token=${token}&address=${address}`;
+        const url = `https://server.lingofi.xyz/api/getString/${token}/${address}`;
         const res = await fetch(url);
         const data = await res.json();
         console.log(data);
