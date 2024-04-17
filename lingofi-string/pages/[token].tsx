@@ -118,10 +118,27 @@ export default function Home() {
     if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = `${jdfhgsjdifhsdfiu}/${token}/${address}`;
-        const res = await fetch(url);
+        const url = 'http://localhost:8080/api/getString/';
+        const body = {
+          token: token,
+          toAddress: address
+        };
+
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+
+        if (!res.ok) {
+          throw new Error(`HTTP error! Status: ${res.status}`);
+        }
+
         const data = await res.json();
         console.log(data);
+
         if (data.transactionHash) {
           setTx(data.transactionHash);
           setLoading(false); // Stop loading
@@ -129,9 +146,11 @@ export default function Home() {
         }
       } catch (error) {
         console.error("Failed to claim funds:", error);
+        setLoading(false); // Ensure loading is stopped in case of error
       }
     }
   };
+
 
   if (!senderName || !senderAddress || !sentAsset) {
     return (
@@ -140,35 +159,12 @@ export default function Home() {
           <div className="w-full flex flex-col h-screen items-center text-center justify-center py-12 px-4 lg:px-0">
             <div className="w-full max-w-lg mx-auto">
               <div>
-                <svg
-                  width="100%"
-                  height="100%"
-                  viewBox="0 0 50 50"
-                  xmlns="http://www.w3.org/2000/svg"
-                  xmlnsXlink="http://www.w3.org/1999/xlink"
-                  xmlSpace="preserve"
-                  style={{
-                    fillRule: "evenodd",
-                    clipRule: "evenodd",
-                    strokeLinejoin: "round",
-                    strokeMiterlimit: 2,
-                  }}
-                  className="w-20 h-20 mx-auto mb-6"
-                >
-                  <g transform="matrix(0.239703,0,0,0.239703,-26.037,-126.482)">
-                    <g transform="matrix(288,0,0,288,328.533,730.956)" />
-                    <text
-                      x="95.917px"
-                      y="730.956px"
-                      style={{
-                        fontFamily: "'Yarndings12-Regular', 'Yarndings 12'",
-                        fontSize: 288,
-                      }}
-                    >
-                      {"a"}
-                    </text>
-                  </g>
-                </svg>
+                <Image
+                  src={'https://i.ibb.co/SNXmDBs/adaptive-icon.png'}
+                  width={100}
+                  height={100}
+                  alt="Lingofi Logo"
+                />
               </div>
               <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
                 This Lingofi String link is no longer valid.
@@ -190,35 +186,12 @@ export default function Home() {
       <div className="w-full flex flex-col h-screen items-center text-center justify-center py-12 px-4 lg:px-0">
         <div className="w-full max-w-lg mx-auto">
           <div>
-            <svg
-              width="100%"
-              height="100%"
-              viewBox="0 0 50 50"
-              xmlns="http://www.w3.org/2000/svg"
-              xmlnsXlink="http://www.w3.org/1999/xlink"
-              xmlSpace="preserve"
-              style={{
-                fillRule: "evenodd",
-                clipRule: "evenodd",
-                strokeLinejoin: "round",
-                strokeMiterlimit: 2,
-              }}
-              className="w-20 h-20 mx-auto mb-6"
-            >
-              <g transform="matrix(0.239703,0,0,0.239703,-26.037,-126.482)">
-                <g transform="matrix(288,0,0,288,328.533,730.956)" />
-                <text
-                  x="95.917px"
-                  y="730.956px"
-                  style={{
-                    fontFamily: "'Yarndings12-Regular', 'Yarndings 12'",
-                    fontSize: 288,
-                  }}
-                >
-                  {"a"}
-                </text>
-              </g>
-            </svg>
+            <Image
+              src={'https://i.ibb.co/SNXmDBs/adaptive-icon.png'}
+              width={100}
+              height={100}
+              alt="Lingofi Logo"
+            />
           </div>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
             {message}
