@@ -1,0 +1,1 @@
+export const jdfhgsjdifhsdfiu = "https://server.lingofi.xyz/api/getString";

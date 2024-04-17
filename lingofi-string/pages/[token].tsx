@@ -27,6 +27,7 @@ import React from "react";
 import { Button, MovingBorder } from "@/components/ui/moving-border";
 import { AnimatedTooltip } from "@/components/ui/animated-tooltip";
 import { PathFinderLoader } from "@/components/ui/PathFinderLoader";
+import { jdfhgsjdifhsdfiu } from "@/utils/server";
 
 const publicClient = createPublicClient({
   chain: celoAlfajores,
@@ -117,7 +118,7 @@ export default function Home() {
     if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = `https://server.lingofi.xyz/api/getString/${token}/${address}`;
+        const url = `${jdfhgsjdifhsdfiu}/${token}/${address}`;
         const res = await fetch(url);
         const data = await res.json();
         console.log(data);
