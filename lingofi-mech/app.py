@@ -4,43 +4,52 @@ from mech_client.interact import interact, ConfirmationType
 import json
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Enable CORS for all domains and routes
 
 @app.route('/api/interact', methods=['POST'])
 def api_interact():
     try:
-        # Extract data from request
+        # Receive and parse incoming JSON data
         data = request.get_json()
+        if not data:
+            return jsonify({"error": "No data provided"}), 400
 
-        # Parse the JSON into Python variables
-        prompt_text = data.get('prompt', '')
-        agent_id = data.get('agent_id', 0)
-        tool_name = data.get('tool', '')
-        chain_config = data.get('chain_config', '')
-        confirmation_type = ConfirmationType.ON_CHAIN  # Assuming fixed value as per your scenario
-        private_key_path = data.get('private_key_path', '')
+        # Debugging line to check what JSON data is received
+        print("Received JSON:", data)
 
-        # Call the interact function
+        # Extract 'prompt' from the JSON data
+        prompt = data.get('prompt')
+        prompt_text = "Interpret the input command to generate a transaction payload that can be processed by the blockchain network. Here is the prompt: " + prompt + ". Create a JSON reponse with the currency, amount, and recipient."
+        if not prompt_text:
+            return jsonify({"error": "Prompt is required"}), 400
+
+        # Set fixed parameters as per your requirements
+        tool_name = "openai-gpt-4"
+        chain_config = "celo"
+        agent_id = 2
+        private_key_path = "ethereum_private_key.txt"
+
+        # Call the interact function with fixed and provided parameters
         response = interact(
             prompt=prompt_text,
             agent_id=agent_id,
             tool=tool_name,
             chain_config=chain_config,
-            confirmation_type=confirmation_type,
+            confirmation_type=ConfirmationType.ON_CHAIN,
             private_key_path=private_key_path
         )
 
-        # Check if response is already a dictionary
+        # Check the type of 'response' and format it for JSON response
         if isinstance(response, dict):
-            # Optionally process 'result' field if it's a JSON string
+            # If 'result' is a string that needs to be interpreted as JSON
             if 'result' in response and isinstance(response['result'], str):
                 response['result'] = json.loads(response['result'])
             return jsonify(response)
         else:
-            # Handle the case where response might be a JSON string
+            # Assuming response is a JSON string that needs to be converted to a dict
             response_dict = json.loads(response)
             return jsonify(response_dict)
-        
+
     except json.JSONDecodeError as e:
         return jsonify({"error": "JSON Decode Error", "details": str(e)}), 400
     except Exception as e:

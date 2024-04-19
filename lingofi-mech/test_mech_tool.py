@@ -3,7 +3,7 @@ import json
 import requests
 
 # Define your parameters
-prompt_text = 'I want to send 1000 cUSD to Alice.'
+prompt_text = 'I want to send 5 Usd to Alice.'
 tool_name = "native_transfer"
 chain_config = "celo"
 agent_id = 2
