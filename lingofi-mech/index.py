@@ -1,7 +1,9 @@
 from flask import Flask, request, jsonify
 from typing import List, Dict, Any, Optional, Tuple
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 def run(prompt: Optional[str]) -> Tuple[Any, Optional[str], Optional[Any], Optional[Any]]:
     response = "Dummy response"
