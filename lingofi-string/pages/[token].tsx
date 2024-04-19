@@ -127,7 +127,8 @@ export default function Home() {
         const res = await fetch(url, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            // 'mode': 'no-cors'
           },
           body: JSON.stringify(body)
         });

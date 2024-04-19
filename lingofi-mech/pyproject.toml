@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "lingofi-mech"
+version = "0.1.0"
+description = ""
+authors = ["Blessing Tanyaradzwa Hove <blessinghove69@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+mech-client = "^0.2.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
