@@ -3,8 +3,8 @@ import json
 import requests
 
 # Define your parameters
-prompt_text = 'Will Gnosis pay reach 100k cards in 2024?'
-tool_name = "prediction-online"
+prompt_text = 'I want to send 1000 cUSD to Alice.'
+tool_name = "native_transfer"
 chain_config = "celo"
 agent_id = 2
 private_key_path = "ethereum_private_key.txt"
