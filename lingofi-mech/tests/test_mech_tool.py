@@ -2,9 +2,19 @@ from mech_client.interact import interact, ConfirmationType
 import json
 import requests
 
-# Define your parameters
-prompt_text = 'I want to send 5 Usd to Alice.'
-tool_name = "native_transfer"
+user_prompt = 'I want to send 5 Celo to Alice.'
+
+prompt_text = f"""Generate a transaction payload based on: {user_prompt}
+Respond in JSON format:
+  "currency": Extracted from the command e.g., Celo, cUSD, cEUR, or cREAL,
+  "amount": Determined from the command,
+  "recipient": Extracted from the command,
+  "reason": Extracted from the command.
+"""
+
+print(prompt_text)
+
+tool_name = "openai-gpt-3.5-turbo"
 chain_config = "celo"
 agent_id = 2
 private_key_path = "ethereum_private_key.txt"

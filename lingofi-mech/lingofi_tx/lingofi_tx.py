@@ -1,22 +1,3 @@
-# -*- coding: utf-8 -*-
-# ------------------------------------------------------------------------------
-#
-#   Copyright 2024 Valory AG
-#
-#   Licensed under the Apache License, Version 2.0 (the "License");
-#   you may not use this file except in compliance with the License.
-#   You may obtain a copy of the License at
-#
-#       http://www.apache.org/licenses/LICENSE-2.0
-#
-#   Unless required by applicable law or agreed to in writing, software
-#   distributed under the License is distributed on an "AS IS" BASIS,
-#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#   See the License for the specific language governing permissions and
-#   limitations under the License.
-#
-# ------------------------------------------------------------------------------
-
 """
 This module implements a tool which prepares a transaction for the transaction settlement skill.
 Please note that the gnosis safe parameters are missing from the payload, e.g., `safe_tx_hash`, `safe_tx_gas`, etc.
@@ -33,19 +14,19 @@ MAX_TOKENS = 500
 TEMPERATURE = 0.7
 TOOL_PREFIX = "transfer-"
 
-NATIVE_TRANSFER_PROMPT = """Interpret the input command to generate a transaction payload that can be processed by the blockchain network.
+LINGOFI_TX_PROMPT = """
+Interpret the input command to construct a transaction payload for the blockchain.
 
-Construct a transaction payload for the input command: {user_prompt}
+For the input: {user_prompt}, format the response as a JSON dictionary:
 
-only respond with the format below using curly brackets to encapsulate the variables within a json dictionary object and no other text:
+    "currency": Extract currency (Celo, cUSD, cEUR, cREAL) from command,
+    "amount": Determine the transfer amount,
+    "recipient": Extract recipient name,
+    "reason": Identify the transaction purpose,
 
-        "currency": Extract the currency from the input command, there can only be Celo, cUSD, cEUR or cREAL,
-        "amount": Determine the amount to be sent.,
-        "recipient": Extract the recipient from the input command. Only the name,
-        "reason": Extract the reason for the transaction from the input command.,
-
-Do not respond with anything else other than the transaction object you constructed with the correct known variables the agent had before the request and the correct unknown values found in the user request prompt as input to the web3.py signing method.
+Respond only with the constructed transaction object, using provided and derived values.
 """
+
 
 client: Optional[OpenAI] = None
 
@@ -89,9 +70,9 @@ def make_request_openai_request(prompt: str, engine: str = ENGINE, max_tokens: O
     )
     return response.choices[0].message.content
 
-def native_transfer(prompt: str) -> Tuple[str, Optional[str], Optional[Dict[str, Any]], Any]:
-    """Perform native transfer."""
-    tool_prompt = NATIVE_TRANSFER_PROMPT.format(user_prompt=prompt)
+def lingofi_tx(prompt: str) -> Tuple[str, Optional[str], Optional[Dict[str, Any]], Any]:
+    """Perform lingofi tx."""
+    tool_prompt = LINGOFI_TX_PROMPT.format(user_prompt=prompt)
     response = make_request_openai_request(prompt=tool_prompt)
 
     try:
@@ -104,13 +85,13 @@ def native_transfer(prompt: str) -> Tuple[str, Optional[str], Optional[Dict[str,
     transaction = {
         "currency": str(parsed_txs["currency"]),
         "amount": int(parsed_txs["amount"]),
-         "recipient": str(parsed_txs["recipient"]),
-          "reason": str(parsed_txs["reason"]),
+        "recipient": str(parsed_txs["recipient"]),
+        "reason": str(parsed_txs["reason"]),
     }
     return response, prompt, None, None
 
 AVAILABLE_TOOLS = {
-    "native_transfer": native_transfer,
+    "lingofi_tx": lingofi_tx, 
 }
 
 def error_response(msg: str) -> Tuple[str, None, None, None]:
@@ -140,25 +121,3 @@ def run(**kwargs) -> Tuple[str, Optional[str], Optional[Dict[str, Any]], Any]:
 
     with OpenAIClientManager(api_key):
         return transaction_builder(prompt)
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Run the transaction tool.")
-    parser.add_argument('--tool', type=str, help='Tool to use.')
-    parser.add_argument('--prompt', type=str, help='Prompt for the transaction.')
-    parser.add_argument('--api_key', type=str, help='OpenAI API key.')
-    parser.add_argument('--engine', type=str, default=ENGINE, help='OpenAI model to use.')
-    parser.add_argument('--max_tokens', type=int, default=MAX_TOKENS, help='Maximum number of tokens to use.')
-    parser.add_argument('--temperature', type=float, default=TEMPERATURE, help='Temperature setting for model creativity.')
-
-    args = parser.parse_args()
-
-    # Execute the tool with all provided arguments
-    result = run(
-        tool=args.tool,
-        prompt=args.prompt,
-        api_keys={"openai": args.api_key},
-        engine=args.engine,
-        max_tokens=args.max_tokens,
-        temperature=args.temperature
-    )
-    print(result)

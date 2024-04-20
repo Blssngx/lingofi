@@ -1,0 +1,16 @@
+name: lingofi_tx
+author: Blessing Tanyaradzwa Hove
+version: 0.1.0
+type: custom
+description: This tool creates a TX payload for the Celo network using NLP (OpenAI's gpt-3.5-turbo).
+license: Apache-2.0
+aea_version: '>=1.0.0, <2.0.0'
+fingerprint:
+  __init__.py: 
+  prepare_tx.py: 
+fingerprint_ignore_patterns: []
+entry_point: lingofi_tx.py
+callable: run
+dependencies:
+  openai:
+    version: ==1.11.0
