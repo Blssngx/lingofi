@@ -19,7 +19,7 @@ Additionally, you will need an API key from OpenAI to authenticate your requests
 Clone this repository or download the source code to your local machine. You can use the following command to clone the repository:
 ```
 git clone [(https://github.com/Blssngx/lingofi.git)]
-cd cd lingofi-mech/lingofi_tx
+cd lingofi-mech/lingofi_tx
 ```
 
 ## Configuration
