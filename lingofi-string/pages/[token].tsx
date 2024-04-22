@@ -118,7 +118,7 @@ export default function Home() {
     if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = `https://lingofi-server.vercel.app/api/getString/`;
+        const url = `http://localhost:8080/api/getString/`;
         const body = {
           token: token,
           toAddress: address
