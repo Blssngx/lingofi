@@ -1,18 +1,55 @@
-# Lingofi
+# Lingofi Platform
 
-Welcome to Lingofi, a transformative platform bringing blockchain technology closer to home. Lingofi is at the forefront of financial inclusion, leveraging the power of Artificial Intelligence (AI) and blockchain to break down barriers in the African financial landscape. By addressing language barriers and the high costs associated with traditional payment systems, Lingofi is not just a tool but a bridge to economic empowerment and participation.
+![Header Image](./assets/header.png)
 
-## Initialization
+Welcome to the Lingofi repository! Lingofi leverages cutting-edge blockchain and AI technologies to transform financial services in Africa by making them accessible and affordable. This platform breaks down language barriers and extends financial inclusion to underserved communities through a user-friendly interface.
 
-Lingofi was initialized using `rn-ai` (https://github.com/dabit3/react-native-ai.git), a comprehensive full-stack framework designed for building cross-platform mobile AI applications. `rn-ai` supports a wide array of features including LLM real-time/streaming text, chat UIs, image services, natural language to images with multiple models, and advanced image processing capabilities. This robust foundation allows Lingofi to offer seamless, intuitive interactions and services to its users.
+## Project Overview
 
-## Features
+Lingofi consists of several components that work together to provide a seamless user experience:
+- **Lingofi Chat**: An AI-driven chat interface that allows users to conduct transactions and access financial services in their native languages.
+- **Mech App**: Powers the natural language understanding capabilities of the platform using advanced AI.
+- **Backend Services**: Manages all backend processes including authentication and transaction processing.
+- **Frontend**: Provides the interface through which users interact with Lingofi services.
 
-- **Natural Language Processing (NLP)**: Lingofi utilizes state-of-the-art NLP capabilities to understand and execute financial transactions from simple, natural language commands.
-- **Blockchain Integration**: At its core, Lingofi leverages blockchain technology to ensure secure, transparent, and low-cost transactions.
-- **AI-Powered Services**: From chat-based transaction initiations to image processing for document verification, Lingofi harnesses AI to enhance user experience and accessibility.
-- **Cross-Platform Accessibility**: Built with `rn-ai`, Lingofi is accessible across multiple platforms, ensuring a wide-reaching impact and usability.
+## Architecture
 
-## Logo
+Below is an overview of the Lingofi architecture, illustrating how each component of the system interacts.
 
-The logo was generated using a font called Yardings 12 (https://fonts.google.com/share?selection.family=Plaster|Yarndings+12). By typing the letter 'a'.
+![Architecture Diagram](./assets/Lingofi%20Architecture.png)
+
+## Account Abstraction Architecture
+
+![Architecture Diagram 2](./assets/aa.png)
+
+## Userflow Architecture
+
+![Architecture Diagram 3](./assets/userflow.png)
+
+## Video Demo
+
+Check out our [video demo](https://youtu.be/sNSzV0zVQow) to see Lingofi in action! The demo covers key features and functionalities of the platform, showcasing how easy and intuitive it is to use Lingofi for financial transactions.
+
+## Apps Description
+
+### Lingofi Chat
+Lingofi Chat is designed to simplify user interaction with financial services. It uses NLP to understand and process user requests in various languages, enabling easy access to financial transactions and services.
+
+### Mech App
+The Mech App integrates with Lingofi Chat to provide real-time language processing. It is built using Python and Flask and is essential for the translation and execution of user commands.
+
+### Backend Services
+The backend is built on Node.js and handles all critical operations from user management to transaction processing. It ensures the platform operates smoothly and securely.
+
+### Frontend
+The frontend is developed using Next.js, providing a responsive and dynamic user interface that interacts seamlessly with the backend and blockchain components.
+
+## Getting Started
+
+To get started with Lingofi, please follow the detailed setup instructions in the README files located in each application's directory:
+- [Lingofi Chat README](./lingofi-chat/README.md)
+- [Mech App README](./lingofi-mech/lingofi_tx/README.md)
+- [Server README](./lingofi-server/README.md)
+- [String README](./lingofi-string//README.md)
+
+These guides will help you set up each component of the platform on your local machine.
