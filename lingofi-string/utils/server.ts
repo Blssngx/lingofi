@@ -1,1 +1,1 @@
-export const jdfhgsjdifhsdfiu = "http://localhost:8080/api/getString";
+export const jdfhgsjdifhsdfiu = "https://lingofi-server.vercel.app/api/getString";
