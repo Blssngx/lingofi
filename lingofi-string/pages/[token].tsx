@@ -118,22 +118,20 @@ export default function Home() {
     if (token && address && isClient) {
       setLoading(true); // Start loading
       try {
-        const url = `https://server.lingofi.xyz/api/getString/${token}/${address}`;
-        // const body = {
-        //   token: token,
-        //   toAddress: address
-        // };
-        const res = await fetch(url);
-        // const data = await res.json();
+        const url = `http://localhost:8080/api/getString/`;
+        const body = {
+          token: token,
+          toAddress: address
+        };
 
-        // const res = await fetch(url, {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //     // 'mode': 'no-cors'
-        //   },
-        //   body: JSON.stringify(body)
-        // });
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': '*' // Allowing all origins for CORS
+          },
+          body: JSON.stringify(body)
+        });
 
         if (!res.ok) {
           throw new Error(`HTTP error! Status: ${res.status}`);

@@ -11,7 +11,7 @@ export default async function handler(req: { query: { token: any; }; }, res: { s
     }
 
     try {
-        const url = `https://server.lingofi.xyz/api/getStringInfo/${token}`;
+        const url = `http://localhost:8080/api/getStringInfo/${token}`;
         const response = await fetch(url);
         const data: any = await response.json();
 

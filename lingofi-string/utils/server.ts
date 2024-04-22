@@ -1,1 +1,1 @@
-export const jdfhgsjdifhsdfiu = "https://server.lingofi.xyz/api/getString";
+export const jdfhgsjdifhsdfiu = "http://localhost:8080/api/getString";
