@@ -30,6 +30,8 @@ Below is an overview of the Lingofi architecture, illustrating how each componen
 
 Check out our [video demo](https://youtu.be/sNSzV0zVQow) to see Lingofi in action! The demo covers key features and functionalities of the platform, showcasing how easy and intuitive it is to use Lingofi for financial transactions.
 
+Also checkout the Lingofi String through MiniPay [video demo](https://youtu.be/jfcQVwzvmkc). We ran into some cors issues just a fews days before submission and wwe struggled to sort them out so Lingofi String wasn't working through production but the logic functions well.
+
 ## Apps Description
 
 ### Lingofi Chat
